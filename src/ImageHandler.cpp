@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QThread>
 #include <QTime>
+#include <QCoreApplication>
 
 #if QT_VERSION < 0x050000
     #include <QGraphicsObject>
@@ -48,7 +49,7 @@ QImage ImageHandler::extractQImage(QObject *imageObj, int offsetX, int offsetY, 
             break;
         }
         pendingGrabbersLocker.unlock();
-        qApp->processEvents();
+        QCoreApplication::instance()->processEvents();
         QThread::yieldCurrentThread();
     }
     img = result->image();
